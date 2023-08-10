@@ -1,0 +1,64 @@
+{
+  "name": "palm-api-code-review",
+  "displayName": "PaLM API Code Review",
+  "description": "The PaLM API Code Review is a powerful extension that enhances code review. From complex API projects to simple web apps, it offers intelligent analysis and collaboration right in your coding environment.",
+  "version": "0.0.4",
+  "publisher": "Zazmic",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zazmicinc/palm-api-code-review.git"
+  },
+  "icon": "icon.jpg",
+  "galleryBanner": {
+    "color": "#0b0009",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.81.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Debuggers",
+    "Machine Learning"
+  ],
+  "keywords": [
+    "code review",
+    "code analysis",
+    "documentation",
+    "security",
+    "best practices"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "menus": {
+      "editor/context": [
+        {
+          "command": "palm-api-code-review.GenerateCode"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "palm-api-code-review.GenerateCode",
+        "title": "PaLM API: Code Review"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "yarn run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.81.0",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "20.2.5",
+    "eslint": "^8.41.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.1.3",
+    "@vscode/test-electron": "^2.3.2"
+  }
+}
