@@ -3,18 +3,19 @@ const fs = require("fs");
 const path = require('path');
 
 
-function createReviewFile(name, content) {
+async function createDirectory(dirPath) {
+  fs.mkdir(dirPath, { recursive: true }, () => { });
+}
+
+async function createReviewFile(name, content, endpoint) {
   const wsedit = new vscode.WorkspaceEdit();
-  const wsPath = vscode.workspace.workspaceFolders[0].uri.fsPath; // gets the path of the first workspace folder
   const pathInfo = path.parse(name);
   
-  const filePath = vscode.Uri.file(wsPath + `/${pathInfo.name}.review.md`);
+  await createDirectory(pathInfo.dir + "/review");
+  const filePath = vscode.Uri.file(pathInfo.dir + `/review/${pathInfo.name}${pathInfo.ext}.${endpoint}.md`);
   wsedit.createFile(filePath, { ignoreIfExists: true });
   
   vscode.workspace.applyEdit(wsedit);
-  vscode.window.showInformationMessage(
-    "Created a new " + filePath.toString()
-  );
 
   try {
     fs.writeFileSync(filePath.fsPath, content, { flag: "w" });

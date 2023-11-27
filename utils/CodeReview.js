@@ -1,6 +1,6 @@
 const https = require("https");
 
-async function generateCodeReview(content) {
+async function codeReview(content, endpoint) {
   return new Promise((resolve, reject) => {
     const postData = JSON.stringify({
       content: content,
@@ -50,5 +50,5 @@ async function generateCodeReview(content) {
 }
 
 module.exports = {
-  generateCodeReview,
+  codeReview
 };

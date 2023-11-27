@@ -2,7 +2,7 @@
   "name": "palm-api-code-review",
   "displayName": "PaLM API Code Review",
   "description": "The PaLM API Code Review is a powerful extension that enhances code review. From complex API projects to simple web apps, it offers intelligent analysis and collaboration right in your coding environment.",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "publisher": "Zazmic",
   "repository": {
     "type": "git",
@@ -32,16 +32,85 @@
   "main": "./extension.js",
   "contributes": {
     "menus": {
+      "explorer/context": [
+        {
+          "submenu": "palm-api-code-review.Submenu",
+          "group": "palm-api-code-review"
+        },
+        {
+          "submenu": "palm-api-code-review.FolderSubmenu",
+          "group": "palm-api-code-review",
+          "when": "explorerResourceIsFolder"
+        }
+      ],
       "editor/context": [
         {
-          "command": "palm-api-code-review.GenerateCode"
+          "submenu": "palm-api-code-review.Submenu",
+          "group": "palm-api-code-review"
+        }
+      ],
+      "palm-api-code-review.Submenu": [
+        {
+          "command": "palm-api-code-review.BasicCodeReview",
+          "when": "resourceScheme == 'file' && resourceFilename =~ /\\.(js|ts|cpp|cs|go|java|kt|php|py|rb|rs|scala|swift)$/i"
+        },
+        {
+          "command": "palm-api-code-review.SecurityIssues",
+          "when": "resourceScheme == 'file' && resourceFilename =~ /\\.(js|ts|cpp|cs|go|java|kt|php|py|rb|rs|scala|swift)$/i"
+        },
+        {
+          "command": "palm-api-code-review.BugsHunting",
+          "when": "resourceScheme == 'file' && resourceFilename =~ /\\.(js|ts|cpp|cs|go|java|kt|php|py|rb|rs|scala|swift)$/i"
+        }
+      ],
+      "palm-api-code-review.FolderSubmenu": [
+        {
+          "command": "palm-api-code-review.BasicCodeReviewFolder"
+        },
+        {
+          "command": "palm-api-code-review.SecurityIssuesFolder"
+        },
+        {
+          "command": "palm-api-code-review.BugsHuntingFolder"
         }
       ]
     },
+    "submenus": [
+      {
+        "command": "palm-api-code-review.Submenu",
+        "id": "palm-api-code-review.Submenu",
+        "label": "PaLM API Code Review ..."
+      },
+      {
+        "command": "palm-api-code-review.FolderSubmenu",
+        "id": "palm-api-code-review.FolderSubmenu",
+        "label": "PaLM API Code Review ..."
+      }
+    ],
     "commands": [
       {
-        "command": "palm-api-code-review.GenerateCode",
-        "title": "PaLM API: Code Review"
+        "command": "palm-api-code-review.BasicCodeReview",
+        "title": "Basic Code Review"
+      },
+      {
+        "command": "palm-api-code-review.SecurityIssues",
+        "title": "Security Issues"
+      },
+      {
+        "command": "palm-api-code-review.BugsHunting",
+        "title": "Bugs Hunting"
+      },
+      {
+        "command": "palm-api-code-review.BasicCodeReviewFolder",
+        "title": "Basic Code Review"
+      },
+      {
+        "command": "palm-api-code-review.SecurityIssuesFolder",
+        "title": "Security Issues"
+      },
+      {
+        "command": "palm-api-code-review.BugsHuntingFolder",
+        "title": "Bugs Hunting"
       }
     ]
   },
